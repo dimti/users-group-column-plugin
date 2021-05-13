@@ -1,0 +1,31 @@
+# ===================================
+#  Form Behavior Config
+# ===================================
+
+# Record name
+name: User Group
+
+# Model Form Field configuration
+form: $/dimti/user-group/models/usergroup/fields.yaml
+
+# Model Class name
+modelClass: Dimti\UserGroup\Models\UserGroup
+
+# Default redirect location
+defaultRedirect: dimti/user-group/usergroups
+
+# Create page
+create:
+    title: backend::lang.form.create_title
+    redirect: dimti/user-group/usergroups/update/:id
+    redirectClose: dimti/user-group/usergroups
+
+# Update page
+update:
+    title: backend::lang.form.update_title
+    redirect: dimti/user-group/usergroups
+    redirectClose: dimti/user-group/usergroups
+
+# Preview page
+preview:
+    title: backend::lang.form.preview_title
