@@ -1,6 +1,8 @@
 <?php namespace Dimti\UserGroup;
 
 use Backend;
+use RainLab\User\Controllers\Users;
+use RainLab\User\Models\User;
 use System\Classes\PluginBase;
 
 /**
@@ -16,7 +18,7 @@ class Plugin extends PluginBase
     public function pluginDetails()
     {
         return [
-            'name'        => 'user-group',
+            'name'        => 'usergroup',
             'description' => 'No description provided yet...',
             'author'      => 'dimti',
             'icon'        => 'icon-leaf'
@@ -40,7 +42,19 @@ class Plugin extends PluginBase
      */
     public function boot()
     {
+        Users::extendListColumns(function ($list, $model) {
+            if (!$model instanceof User) {
+                return;
+            }
 
+            $list->addColumns([
+                'groups' => [
+                    'label' => 'rainlab.user::lang.user.groups',
+                    'relation' => 'groups',
+                    'select' => 'name',
+                ]
+            ]);
+        });
     }
 
     /**
@@ -67,8 +81,8 @@ class Plugin extends PluginBase
         return []; // Remove this line to activate
 
         return [
-            'dimti.user-group.some_permission' => [
-                'tab' => 'user-group',
+            'dimti.usergroup.some_permission' => [
+                'tab' => 'usergroup',
                 'label' => 'Some permission'
             ],
         ];
@@ -86,9 +100,9 @@ class Plugin extends PluginBase
         return [
             'user-group' => [
                 'label'       => 'user-group',
-                'url'         => Backend::url('dimti/user-group/mycontroller'),
+                'url'         => Backend::url('dimti/usergroup/mycontroller'),
                 'icon'        => 'icon-leaf',
-                'permissions' => ['dimti.user-group.*'],
+                'permissions' => ['dimti.usergroup.*'],
                 'order'       => 500,
             ],
         ];
