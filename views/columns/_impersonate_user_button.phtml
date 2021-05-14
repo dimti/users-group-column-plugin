@@ -1,0 +1,13 @@
+<?php if ($this->user->hasAccess('rainlab.users.impersonate_user')):?>
+    <?php if ($record->is_activated):?>
+        <a
+            href="javascript:;"
+            data-request-confirm="<?= e(trans('rainlab.user::lang.users.impersonate_confirm')) ?>"
+            data-request-data="id: <?=$record->id?>"
+            class="btn btn-default oc-icon-user-secret">
+            <?= e(trans('rainlab.user::lang.users.impersonate_user')) ?>
+        </a>
+    <?php else:?>
+        <?= e(trans('rainlab.user::lang.users.activate_warning_title')) ?>
+    <?php endif;?>
+<?php endif;?>
